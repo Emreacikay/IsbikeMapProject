@@ -1,0 +1,178 @@
+﻿
+@model IsbikeGeoJson
+@{
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>IBB ISBIKE LOCATIONS</title>
+     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+     <script src="https://cdn.maptiler.com/maplibre-gl-js/v2.1.1/maplibre-gl.js"></script>
+     
+     <link href="https://cdn.maptiler.com/maplibre-gl-js/v2.1.1/maplibre-gl.css" rel="stylesheet" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+body { 
+    margin: 0;
+    padding: 0;
+    background: rgb(247, 255, 254);
+}
+
+#map {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    bottom: 9%;
+    width: 80%;
+}
+
+.get-location{
+    left: 10%  ;
+}
+
+#headerTitle{
+    background:#5a5a6d; 
+    text-align: center; 
+    color:white; 
+    padding:10px 20px
+}
+
+
+.maplibregl-popup-content{
+    width: 200px;
+    text-align: center !important;
+}
+
+.popupName{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 16px;
+}
+.popupFlex{
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+
+.popupValue{
+    font-weight: normal;
+}
+    </style>
+    
+</head>
+<body>
+ <div id="hiddenGeoJsonContainer" hidden="hidden" data-data="@Model.GeoJson"></div>
+@* <div id="menu">
+<input id="satellite-v9" type="radio" name="rtoggle" value="Osm" checked="checked">
+<label for="satellite-v9">Osm</label>
+
+<input id="dark-v10" type="radio" name="rtoggle" value="Bicycle">
+<label for="dark-v10">Bicycle</label>
+</div>*@
+ <div id="map">
+
+       <script>
+var coordinates = new maplibregl.LngLat(28.97147, 41.03929);
+const urlParams = new URLSearchParams(window.location.search);
+const key = urlParams.get('key') || 'faZLG1SPG36OvAL0qnbK';
+
+var map = new maplibregl.Map({
+    container: 'map', // container id
+    style: `https://api.maptiler.com/maps/openstreetmap/style.json?key=${key}`, // style URL
+    center: [coordinates.lng, coordinates.lat], // starting position [lng, lat]
+    zoom: 15 // starting zoom
+});
+        
+//const layerList = document.getElementById('menu');
+//const inputs = layerList.getElementsByTagName('input');
+
+//        for (const input of inputs) {
+//            input.onclick = (layer) => {
+//                const layerId = layer.target.id;
+//                map.setStyle('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=404bb1f3549d4533808627417a440913');
+//            };
+   
+ map.on('load', function() {
+        
+     let geo = document.getElementById('hiddenGeoJsonContainer');
+     let geoJson = geo.dataset.data;
+         //console.log(geoJson);
+     const parsedGeoJson = JSON.parse(geoJson);
+        // Initialize the geolocate control.
+     var geolocate = new maplibregl.GeolocateControl({
+         positionOptions: { enableHighAccuracy: true },
+         trackUserLocation: true,
+     });
+        
+
+     map.loadImage(
+         'https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/bike-48.png',
+         function(error, image) {
+             if (error) throw error;
+             map.addImage('custom-marker', image);
+         });
+        
+
+     map.addSource("isbike", {
+         "type": "geojson",
+         "data": parsedGeoJson,
+
+     });
+    
+     map.addLayer({
+         "id": "isbikeTextandImage",
+         "type": "symbol",
+         "source": "isbike",
+         "layout": {
+             "icon-image": 'custom-marker',
+             "text-field": "{St_Name}",
+             "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+             "text-offset": [0, 1.3],
+             "text-anchor": "top"
+         }
+     });
+
+     var nav = new maplibregl.NavigationControl({ showZoom: true, showCompass: true });
+     map.addControl(nav, 'top-left'); 
+        
+     map.addControl(geolocate);
+      
+     geolocate.on('trackuserlocationstart', function() {
+         console.log('A trackuserlocationstart event has occurred.')
+
+     });
+
+     map.on('mouseenter', 'isparkTextandImage', function() {
+         map.getCanvas().style.cursor = 'pointer';
+     });
+
+     map.on('mouseleave', 'isparkTextandImage', function() {
+         map.getCanvas().style.cursor = '';
+     });
+
+
+     map.on('click', 'isbikeTextandImage', function(e) {
+
+         new maplibregl.Popup()
+             .setLngLat([e.lngLat.lng, e.lngLat.lat])
+             .setHTML('<span class="popupName text-center">' + e.features[0].properties.St_Name + '</span>' +
+                 '<span class="popupFlex">Station Id: <span class="popupValue">' + e.features[0].properties.St_Id + '</span></span>' +
+                 '<span class="popupFlex">Station No: <span class="popupValue">' + e.features[0].properties.St_No + '</span></span>' +
+                 '<span class="popupFlex">Active Status: <span class="popupValue">' + e.features[0].properties.isActive + '</span></span>' +
+                 '<span class="popupFlex">Empty Cycles: <span class="popupValue">' + e.features[0].properties.emptyCycles + '</span></span>' +
+                 '<span class="popupFlex">Full Cycles: <span class="popupValue">' + e.features[0].properties.fullCycles + '</span></span>' +
+                 '<span class="popupFlex">Last Connection: <span class="popupValue">' + e.features[0].properties.lastConnection + '</span></span>')
+             .addTo(map)
+     });
+        
+  });
+
+    </script>
+    
+ </div>   
+</body>
+</html>

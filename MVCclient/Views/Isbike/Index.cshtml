@@ -1,0 +1,78 @@
+﻿@model ListIsbikeViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+    td,th{
+        text-align: center;
+        }
+    </style>
+
+<script>
+function relocate_Create()
+{
+     location.href = "/Isbike/Create";
+} 
+</script>
+</head>
+<body>
+
+<p class="text-xl-center font-weight-bold mt-2">Panel</p>
+<button onclick="    relocate_Create();" class="btn btn-md btn-dark float-right mb-3 mr-sm-3" role="button" >Create</button>
+                        <table id="IsbikeStationList" class="table table-bordered table-hover">
+                            <thead>
+                                <tr id="0">
+                                    <th>Station Id
+                                    </th>
+                                    <th>Station No
+                                    </th>
+                                    <th>Station Name
+                                    </th>
+                                    <th>Active Status   
+                                    </th>
+                                    <th>Full Cycle
+                                    </th> 
+                                    <th>Empty Cycle
+                                    </th>
+                                    <th>Latitude
+                                    </th>
+                                    <th>Longitude
+                                    </th>
+                                    <th>Last Connection
+                                    </th>
+                                    <th>Crud Operations  
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.isbike)
+                                {  
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.istasyon_no)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.adi)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.aktif)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.dolu)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.bos)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lat)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.lon)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.sonBaglanti)</td>
+                                         <td>
+                                          <a asp-controller="Isbike" asp-action="Update" asp-route-id="@item.Id">Edit</a> |
+                                          <a asp-controller="Isbike" asp-action="Detail" asp-route-id="@item.Id">Detail</a> |
+                                          <a onclick="return confirm('Are you sure?')" asp-controller="Isbike" asp-action="Delete" asp-route-id="@item.Id" style="color:red">Delete</a>
+                                         </td> 
+                                   </tr>
+                                }
+                            </tbody>
+                        </table>
+                        
+</body>
+</html>

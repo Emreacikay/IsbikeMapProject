@@ -1,0 +1,71 @@
+﻿@{
+    @model UserDto;
+}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @@media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .form-signin{
+          width: 30%;
+      }
+
+      .form-control{
+          margin-top: 4px;
+      }
+    </style>
+   
+  </head>
+  <body class="text-center">
+ <div style="margin-top: 13%">
+    <form class="form-signin m-auto mt-3" method="post">
+  <img class="mb-4" src="..\1200x630wa.png" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus asp-for="Email">
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="password" class="form-control" placeholder="Password" required asp-for="Password">
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="passwordConfirm" class="form-control" placeholder="Password Confirm" required asp-for="PasswordConfirm">
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" onclick="showPassword(); showPasswordConfirm();"value="remember-me"> Show password
+    </label>
+  </div>
+  <button class="btn btn-sm btn-primary btn-block" type="submit">Sign up</button>
+  <p class="mt-5 mb-3 text-muted">Ibb Isbike Service &copy; </p>
+</form>
+</div>
+<script> function showPassword() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}</script>
+
+<script>
+  function showPasswordConfirm() {
+  var x = document.getElementById("passwordConfirm");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}</script>
+</body>
+</html>

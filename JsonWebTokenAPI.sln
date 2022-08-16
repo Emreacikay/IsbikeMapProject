@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonWebTokenAPI", "JsonWebTokenAPI\JsonWebTokenAPI.csproj", "{A44D0EE5-2B03-4C88-96E1-42C97AD65C91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCclient", "MVCclient\MVCclient.csproj", "{C1D15906-D244-49ED-A95B-5E733DFC9E74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A44D0EE5-2B03-4C88-96E1-42C97AD65C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A44D0EE5-2B03-4C88-96E1-42C97AD65C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A44D0EE5-2B03-4C88-96E1-42C97AD65C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A44D0EE5-2B03-4C88-96E1-42C97AD65C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D15906-D244-49ED-A95B-5E733DFC9E74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D15906-D244-49ED-A95B-5E733DFC9E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D15906-D244-49ED-A95B-5E733DFC9E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D15906-D244-49ED-A95B-5E733DFC9E74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5699ABE6-89DF-47D8-A315-411AE4D20751}
+	EndGlobalSection
+EndGlobal

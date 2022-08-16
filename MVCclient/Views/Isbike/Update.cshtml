@@ -1,0 +1,130 @@
+﻿@model IsbikeVievModel
+@{
+    Layout = "~/Views/Shared/_LayoutAfterLogin.cshtml";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+body { 
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+.form-control{
+    margin-top: 5px;
+    width: 55%;
+}
+
+.form-IsbikeUpdate{
+    width: 50%;
+   
+}
+.h5{
+    margin-top: 16%;
+    padding-bottom: 25px;
+}
+
+.btn{
+    margin-top: 10px;
+}
+.updateInputs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.updateText{
+    font-weight: 600;
+    margin-top: 5px;    
+}
+    </style>
+    
+</head>
+<body>
+   <span class="Update-Form">
+        <form class="form-IsbikeUpdate m-auto mt-3" method="post">
+         <h1 class="h5 mb-3 font-weight-bold text-center">Currently updating @Model.adi </h1>
+        
+        <div class="updateInputs">
+        <label for="update_Active" class="sr-only">Active Status:</label>
+         <span class="updateText">Active Status :</span>
+         <input type="checkbox" id="input_Active" class="form-control" value="@Model.aktif" asp-for="aktif">
+        </div>
+        
+        <div class="updateInputs">
+        <label for="update_Id" class="sr-only">Isbike Id(!)</label>
+         <span class="updateText">Station Id: </span>
+          <input type="number" id="input_Id" class="form-control" value="@Model.Id" required asp-for="Id">
+        </div>
+
+        <div class="updateInputs">
+        <label for="update_Station_No" class="sr-only">Station No</label>
+         <span class="updateText">Station No: </span> 
+          <input type="number" id="input_Station_No" class="form-control" value="@Model.istasyon_no" required asp-for="istasyon_no">
+         </div>
+
+        <div class="updateInputs">
+        <label for="update_Station_Name" class="sr-only">Station Name:</label>
+         <span class="updateText">Station Name: </span> 
+          <input type="text" id="input_Station_Name" class="form-control" value="@Model.adi" required asp-for="adi">
+        </div>
+
+        <div class="updateInputs">  
+        <label for="update_Full_Cycle" class="sr-only">Full Cycles</label>
+         <span class="updateText">Full Cycles: </span> 
+          <input type="number" id="input_Full_Cycle" class="form-control" value="@Model.dolu" required asp-for="dolu"> 
+        </div>
+
+        <div class="updateInputs">
+        <label for="update_Empty_Cycle" class="sr-only">Empty Cycles</label>
+         <span class="updateText">Empty Cycles: </span> 
+          <input type="number" id="input_Empty_Cycle" class="form-control" value="@Model.bos" required asp-for="bos">
+        </div>
+
+            @{
+                var ConvertTo = @Model.lat.ToString().Replace(',', '.');
+                var ConvertTo2 = @Model.lon.ToString().Replace(',', '.');
+
+            }
+
+        <div class="updateInputs">
+        <label for="update_Latitude" class="sr-only">Latitude:</label>
+         <span class="updateText">Latitude: </span> 
+          <input type="number" id="input_Latitude" class="form-control" step="0.0001" value="@ConvertTo" required asp-for="lat">
+        </div>
+
+        <div class="updateInputs">  
+        <label for="update_Longitude" class="sr-only">Longitude:</label>
+         <span class="updateText">Longitude: </span> 
+          <input type="number" id="input_Longitude" class="form-control" step="0.0001" value="@ConvertTo2" required asp-for="lon">
+        </div>
+
+        <div class="updateInputs">  
+        <label for="update_Last_Connection" class="sr-only">Son Bağlantı:</label>
+         <span class="updateText">Last Connection: </span> 
+          <input type="datetime" id="input_Last_Connection" class="form-control" value="@Model.sonBaglanti" required asp-for="sonBaglanti">
+        </div>
+        
+          <button href="/Isbike" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-primary btn-block" type="submit" >Update</button>
+        </form>
+   </span>
+       
+</body>
+<script>
+  var x = document.getElementById("input_Active").addEventListener('change', function (){
+  if (this.checked) {
+      this.value = true; 
+      console.log("Checkbox is checked..");
+  } else {
+      this.value = false;
+      console.log("Checkbox is not checked..");
+  }
+});
+</script>
+</html>
