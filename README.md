@@ -6,9 +6,9 @@ You also need to set up a multiptle start-up. To do this, right click on the sol
 
 What Isbike Map does ?
 
-It is basically a location based map project that shows isbike(bike rental company) stations on the map to the user. We can say an admin panel type of project but there is a map on the website. You can service only the map with users to see them or you let them edit its up to you. When you edit a data, it will update itself on the map instantly. For example, let's say you changed coordinates of a station then it will automatically pop up in the new coordinates with same infos.
+-It is basically a location based map project that shows isbike(bike rental company) stations on the map to the user. We can say an admin panel type of project but there is a map on the website. You can service only the map with users to see them or you let them edit its up to you. When you edit a data, it will update itself on the map instantly. For example, let's say you changed coordinates of a station then it will automatically pop up in the new coordinates with same infos.
 
-You can edit the data, add a new station or delete one. To be able to do this operations you must first register then login so a token based auth works and let's the user change data.
+-You can edit the data, add a new station or delete one. To be able to do this operations you must first register then login so a token based auth works and let's the user change data.
 
 API does the auth, token and database operations.
 
