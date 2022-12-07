@@ -1,3 +1,5 @@
+//This is my first ever project :')
+
 Hi welcome, this is my Isbike Map project. Let me tell you how you can run the application. This project uses a msSql database(ibbDb). So firstly, you need to adjust your database to this project. I will share a .Bak file with you so you can recover the database from that file. But if you are using another database except from msSql you need to adjust your connection string in the appSettings file. In this .Bak file there will be full of bike data so you need to also fullfil them manually if you are using another database.
 
 I am using a local database so my connection string is "server=(LocalDb)\MSSQLLocalDb;Database=ibbDb;trusted_connection=True", if you have a another database name please also modify the connection string and then recover from .bak file.
